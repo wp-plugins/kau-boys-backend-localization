@@ -3,7 +3,7 @@
 Plugin Name: Kau-Boy's Backend Localization
 Plugin URI: http://kau-boys.ramarka.de/blog/2009/09/01/kau-boys-backend-localization-plugin/
 Description: Kau-Boy's Backend Localization
-Version: 0.2
+Version: 0.3
 Author: Bernhard Kau
 Author URI: http://kau-boys.ramarka.de/blog
 */
@@ -12,7 +12,7 @@ Author URI: http://kau-boys.ramarka.de/blog
 define('BACKEND_LOCALIZATION_URL', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)));
 
 function init_backend_localization() {
-	load_plugin_textdomain('backend_localization', false, dirname(plugin_basename(__FILE__)));
+	load_plugin_textdomain('backend-localization', false, dirname(plugin_basename(__FILE__)));
 }
 
 function backend_localization_admin_menu(){
@@ -44,16 +44,16 @@ function backend_localization_admin_settings(){
 <div class="wrap">
 	<h2>Kau-Boy's Backend Localization</h2>
 	<?php if($settings_saved) : ?>
-	<div id="message" class="updated fade"><p><?php _e('Saved changes'); _e('Switch page or refresh to see the backend in the new language', 'backend_localization'); ?>.</p></div>
+	<div id="message" class="updated fade"><p><?php _e('Saved changes') ?>.</p></div>
 	<? endif ?>
 	<p>
-		<?php _e('Here you can customize the plugin for your needs.', 'backend_localization') ?>
+		<?php _e('Here you can customize the plugin for your needs.', 'backend-localization') ?>
 	</p>
 	<form method="post" action="">
 		<p>
-			<label for="kau-boys_backend_localization_language" style="width: 200px; display: inline-block;"><?php _e('Backend locale', 'backend_localization') ?></label>
+			<label for="kau-boys_backend_localization_language" style="width: 200px; display: inline-block;"><?php _e('Backend locale', 'backend-localization') ?></label>
 			<input type="text" id="kau-boys_backend_localization_language" name="kau-boys_backend_localization_language" value="<?php echo $backend_locale ?>" />
-			<span class="description"><?php _e('Here you can set the locale you want to use in the backend (default = en_EN).', 'backend_localization') ?></span>
+			<span class="description"><?php _e('Here you can set the locale you want to use in the backend (default = en_EN).', 'backend-localization') ?></span>
 		</p>
 		<p class="submit">
 			<input class="button-primary" name="save" type="submit" value="<?php _e('Save Changes') ?>" />
@@ -66,7 +66,7 @@ function backend_localization_admin_settings(){
 
 function localize_backend($locale) {
 	if(defined('WP_ADMIN')) {
-		$locale = get_option('kau-boys_backend_localization_language');
+		$locale = isset($_POST['save'])? $_POST['kau-boys_backend_localization_language'] : get_option('kau-boys_backend_localization_language');
 	}
 	return $locale;
 }

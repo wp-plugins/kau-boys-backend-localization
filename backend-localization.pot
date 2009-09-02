@@ -16,11 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 
-#: backend_localization.php:47
-msgid ""
-"Switch page or refresh to see the backend in the new language."
-msgstr ""
-
 #: backend_localization.php:50
 msgid "Here you can customize the plugin for your needs."
 msgstr ""
