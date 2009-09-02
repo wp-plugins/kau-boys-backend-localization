@@ -3,7 +3,7 @@
 Plugin Name: Kau-Boy's Backend Localization
 Plugin URI: http://kau-boys.ramarka.de/blog/2009/09/01/kau-boys-backend-localization-plugin/
 Description: Kau-Boy's Backend Localization
-Version: 0.1
+Version: 0.2
 Author: Bernhard Kau
 Author URI: http://kau-boys.ramarka.de/blog
 */
@@ -44,7 +44,7 @@ function backend_localization_admin_settings(){
 <div class="wrap">
 	<h2>Kau-Boy's Backend Localization</h2>
 	<?php if($settings_saved) : ?>
-	<div id="message" class="updated fade"><p><?php _e('Saved changes. Switch page or refresh to see the backend in the new language', 'backend_localization') ?>.</p></div>
+	<div id="message" class="updated fade"><p><?php _e('Saved changes'); _e('Switch page or refresh to see the backend in the new language', 'backend_localization'); ?>.</p></div>
 	<? endif ?>
 	<p>
 		<?php _e('Here you can customize the plugin for your needs.', 'backend_localization') ?>
