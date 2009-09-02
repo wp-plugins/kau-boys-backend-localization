@@ -57,7 +57,8 @@ function backend_localization_admin_settings(){
 				en_EN
 			</label>
 			<br />
-			<?php foreach(backend_localization_get_locale() as $locale_key => $locale_value) : ?>
+			<?php $backend_locale_array = backend_localization_get_locale() ?>
+			<?php foreach($backend_locale_array as $locale_key => $locale_value) : ?>
 			<input type="radio" value="<?php echo $locale_value ?>" id="kau-boys_backend_localization_language_<?php echo $locale_value ?>" name="kau-boys_backend_localization_language"<?php echo ($backend_locale == $locale_value)? ' checked="checked"' : '' ?> />
 			<label for="kau-boys_backend_localization_language_<?php echo $locale_value ?>" style="width: 200px; display: inline-block;">
 				<img src="<?php echo BACKEND_LOCALIZATION_URL.'flag_icons/'.$locale_key.'.png' ?>" alt="<php echo $locale_value ?>" />
@@ -65,6 +66,10 @@ function backend_localization_admin_settings(){
 			</label>
 			<br />
 			<?php endforeach ?>
+			<input type="radio" value="custom" id="kau-boys_backend_localization_language_custom" name="kau-boys_backend_localization_language"<?php echo (($backend_locale == 'custom'))? ' checked="checked"' : '' ?> />
+			<label for="kau-boys_backend_localization_language_custom" style="display: inline-block;">Custom: </label>
+			<input type="text" name="kau-boys_backend_localization_language_custom" value="<?php echo $backend_locale_custom ?>" style="vertical-align: middle;" />
+			<br />
 			<span class="description"><?php _e('Here you can set the locale you want to use in the backend (default = en_EN).', 'backend-localization') ?></span>
 		</p>
 		<p class="submit">
@@ -77,17 +82,17 @@ function backend_localization_admin_settings(){
 }
 
 function backend_localization_get_locale(){
-	$wp_locale = array();
+	$backend_locale_array = array();
 	
 	$files = scandir(ABSPATH.'wp-includes/languages'); /*WP_CONTENT_DIR*/
 	foreach($files as $file){
 		$fileParts = pathinfo($file);
 		if($fileParts['extension'] == 'mo' && strlen($fileParts['filename']) == 5){
-			$wp_locale[substr($fileParts['filename'], 0, 2)] = $fileParts['filename'];
+			$backend_locale_array[substr($fileParts['filename'], 0, 2)] = $fileParts['filename'];
 		}
 	}
 	
-	return $wp_locale;
+	return $backend_locale_array;
 }
 
 function localize_backend($locale) {
