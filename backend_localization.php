@@ -64,7 +64,7 @@ function backend_localization_admin_settings(){
 <?php
 }
 
-function localize_backend() {
+function localize_backend($locale) {
 	if(defined('WP_ADMIN')) {
 		$locale = get_option('kau-boys_backend_localization_language');
 	}
