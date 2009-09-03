@@ -35,10 +35,6 @@ function backend_localization_admin_settings(){
 		$settings_saved = backend_localization_save_setting();
 	}
 	$backend_locale = get_option('kau-boys_backend_localization_language');
-	$backend_locale_custom = get_option('kau-boys_backend_localization_language_custom');
-	
-	// change $backend_locale if custom value has been choosen
-	if($backend_locale == 'custom_locale') $backend_locale = $backend_locale_custom; 
 	
 	// set default if values haven't been recieved from the database
 	if(empty($backend_locale)) $backend_locale = 'en_US';
@@ -64,10 +60,9 @@ function backend_localization_admin_settings(){
 			</label>
 			<br />
 			<?php endforeach ?>
-			<input type="radio" value="custom" id="kau-boys_backend_localization_language_new" name="kau-boys_backend_localization_language"<?php echo (($backend_locale == 'custom'))? ' checked="checked"' : '' ?> />
-			<label for="kau-boys_backend_localization_language_new" style="display: inline-block;">Custom: </label>
-			<input type="text" name="kau-boys_backend_localization_language_custom" value="<?php echo $backend_locale_custom ?>" style="vertical-align: middle;" />
-			<span class="description"><?php _e('Here you can set a custom lan (default = en_US).', 'backend-localization') ?></span>
+			<div class="description">
+				<?php echo sprintf(__('If your language isn\'t listed, you have to download the right version from the WordPress repository: <a href="http://svn.automattic.com/wordpress-i18n">http://svn.automattic.com/wordpress-i18n</a>. Browser to the language folder of your choice and get the <b>all</b> .mo files for your WordPress Version from <i><b>tags/%1s/messages/</b></i> or from the <i><b>trunk/messages/</b></i>. Upload them to the langauge folder <i>%2s</i>. You should than be able to choose the new language (or after a refresh of this page).', 'backend-localization'), $GLOBALS['wp_version'], WP_LANG_DIR) ?>
+			</div>
 		</p>
 		<p class="submit">
 			<input class="button-primary" name="save" type="submit" value="<?php _e('Save Changes') ?>" />
@@ -81,11 +76,13 @@ function backend_localization_admin_settings(){
 function backend_localization_get_languages(){
 	$backend_locale_array = array();
 	
-	$files = scandir(WP_LANG_DIR);
-	foreach($files as $file){
-		$fileParts = pathinfo($file);
-		if($fileParts['extension'] == 'mo' && strlen($fileParts['filename']) == 5){
-			$backend_locale_array[] = $fileParts['filename'];
+	if(is_dir(WP_LANG_DIR)){
+		$files = scandir(WP_LANG_DIR);
+		foreach($files as $file){
+			$fileParts = pathinfo($file);
+			if($fileParts['extension'] == 'mo' && strlen($fileParts['filename']) == 5){
+				$backend_locale_array[] = $fileParts['filename'];
+			}
 		}
 	}
 	
@@ -99,7 +96,6 @@ function backend_localization_get_languages(){
 
 function backend_localization_save_setting(){
 	update_option('kau-boys_backend_localization_language', $_POST['kau-boys_backend_localization_language']);
-	update_option('kau-boys_backend_localization_language_custom', $_POST['kau-boys_backend_localization_language_custom']);
 	
 	return true;
 }
@@ -108,13 +104,7 @@ function localize_backend($locale) {
 	if(defined('WP_ADMIN')) {
 		// save settings before getting the locale
 		if(isset($_POST['save'])) backend_localization_save_setting(); 
-		
-		$backend_locale = get_option('kau-boys_backend_localization_language');
-		$backend_locale_custom = get_option('kau-boys_backend_localization_language_custom');
-		// change $backend_locale if custom value has been choosen
-		if($backend_locale == 'custom_locale') $backend_locale = $backend_locale_custom; 
-		
-		$locale = $backend_locale;
+		$locale = get_option('kau-boys_backend_localization_language');
 	}
 	return $locale;
 }
