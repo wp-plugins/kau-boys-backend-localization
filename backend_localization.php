@@ -55,7 +55,7 @@ function backend_localization_admin_settings(){
 			<?php foreach($backend_locale_array as $locale_value) : ?>
 			<input type="radio" value="<?php echo $locale_value ?>" id="kau-boys_backend_localization_language_<?php echo $locale_value ?>" name="kau-boys_backend_localization_language"<?php echo ($backend_locale == $locale_value)? ' checked="checked"' : '' ?> />
 			<label for="kau-boys_backend_localization_language_<?php echo $locale_value ?>" style="width: 200px; display: inline-block;">
-				<img src="<?php echo BACKEND_LOCALIZATION_URL.'flag_icons/'.substr($locale_value, -2).'.png' ?>" alt="<php echo $locale_value ?>" />
+				<img src="<?php echo BACKEND_LOCALIZATION_URL.'flag_icons/'.strtolower(substr($locale_value, (strpos($locale_value, '_') * -1))).'.png' ?>" alt="<?php echo $locale_value ?>" />
 				<?php echo $locale_value ?>
 			</label>
 			<br />
@@ -80,7 +80,7 @@ function backend_localization_get_languages(){
 		$files = scandir(WP_LANG_DIR);
 		foreach($files as $file){
 			$fileParts = pathinfo($file);
-			if($fileParts['extension'] == 'mo' && strlen($fileParts['filename']) == 5){
+			if($fileParts['extension'] == 'mo' && (strlen($fileParts['filename']) == 2 || strlen($fileParts['filename']) == 5)){
 				$backend_locale_array[] = $fileParts['filename'];
 			}
 		}
