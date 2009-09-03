@@ -6,8 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/kau-boys-backend-localization\n"
-"POT-Creation-Date: 2009-08-11 22:31+0000\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/kau-boys-backend-"
+"localization\n"
+"POT-Creation-Date: 2009-09-03 10:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,17 +16,27 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: backend_localization.php:19
+msgid "Backend Language"
+msgstr ""
 
-#: backend_localization.php:50
+#: backend_localization.php:49
 msgid "Here you can customize the plugin for your needs."
 msgstr ""
 
-#: backend_localization.php:54
-msgid "Backend locale"
+#: backend_localization.php:53
+msgid "Available languages"
 msgstr ""
 
-#: backend_localization.php:56
+#: backend_localization.php:64
+#, php-format
 msgid ""
-"Here you can set the locale you want to use in the backend (default = en_EN)."
+"If your language isn't listed, you have to download the right version from "
+"the WordPress repository: <a href=\"http://svn.automattic.com/wordpress-i18n"
+"\">http://svn.automattic.com/wordpress-i18n</a>. Browser to the language "
+"folder of your choice and get the <b>all</b> .mo files for your WordPress "
+"Version from <i><b>tags/%1s/messages/</b></i> or from the <i><b>trunk/"
+"messages/</b></i> folder. Upload them to the langauge folder <i>%2s</i>. You "
+"should than be able to choose the new language (or after a refresh of this "
+"page)."
 msgstr ""
-

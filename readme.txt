@@ -9,7 +9,8 @@ This plugin enables you to run your blog in a different language than the backen
 
 == Description ==
 
-This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration. 
+This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration.
+You can choose the language you want to use from all installed language files or you can install additional languages. 
 
 == Installation ==
 
