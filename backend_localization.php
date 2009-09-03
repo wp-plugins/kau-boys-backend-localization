@@ -32,13 +32,16 @@ function backend_localization_filter_plugin_actions($links, $file){
 
 function backend_localization_admin_settings(){
 	if(isset($_POST['save'])){	
-		update_option('kau-boys_backend_localization_language', $_POST['kau-boys_backend_localization_language']);
-		$settings_saved = true;
+		$settings_saved = backend_localization_save_setting();
 	}
 	$backend_locale = get_option('kau-boys_backend_localization_language');
+	$backend_locale_custom = get_option('kau-boys_backend_localization_language_custom');
+	
+	// change $backend_locale if custom value has been choosen
+	if($backend_locale == 'custom_locale') $backend_locale = $backend_locale_custom; 
 	
 	// set default if values haven't been recieved from the database
-	if(empty($backend_locale)) $backend_locale = 'en_EN';
+	if(empty($backend_locale)) $backend_locale = 'en_US';
 ?>
 
 <div class="wrap">
@@ -51,26 +54,20 @@ function backend_localization_admin_settings(){
 	</p>
 	<form method="post" action="">
 		<p>
-			<input type="radio" value="<?php echo $locale_value ?>" id="kau-boys_backend_localization_language_en_EN" name="kau-boys_backend_localization_language"<?php echo ($backend_locale == 'en_EN')? ' checked="checked"' : '' ?> />
-			<label for="kau-boys_backend_localization_language_en_EN" style="width: 200px; display: inline-block;">
-				<img src="<?php echo BACKEND_LOCALIZATION_URL.'flag_icons/us.png' ?>" />
-				en_EN
-			</label>
-			<br />
-			<?php $backend_locale_array = backend_localization_get_locale() ?>
-			<?php foreach($backend_locale_array as $locale_key => $locale_value) : ?>
+			<h2>Available languages</h2>
+			<?php $backend_locale_array = backend_localization_get_languages() ?>
+			<?php foreach($backend_locale_array as $locale_value) : ?>
 			<input type="radio" value="<?php echo $locale_value ?>" id="kau-boys_backend_localization_language_<?php echo $locale_value ?>" name="kau-boys_backend_localization_language"<?php echo ($backend_locale == $locale_value)? ' checked="checked"' : '' ?> />
 			<label for="kau-boys_backend_localization_language_<?php echo $locale_value ?>" style="width: 200px; display: inline-block;">
-				<img src="<?php echo BACKEND_LOCALIZATION_URL.'flag_icons/'.$locale_key.'.png' ?>" alt="<php echo $locale_value ?>" />
+				<img src="<?php echo BACKEND_LOCALIZATION_URL.'flag_icons/'.substr($locale_value, -2).'.png' ?>" alt="<php echo $locale_value ?>" />
 				<?php echo $locale_value ?>
 			</label>
 			<br />
 			<?php endforeach ?>
-			<input type="radio" value="custom" id="kau-boys_backend_localization_language_custom" name="kau-boys_backend_localization_language"<?php echo (($backend_locale == 'custom'))? ' checked="checked"' : '' ?> />
-			<label for="kau-boys_backend_localization_language_custom" style="display: inline-block;">Custom: </label>
+			<input type="radio" value="custom" id="kau-boys_backend_localization_language_new" name="kau-boys_backend_localization_language"<?php echo (($backend_locale == 'custom'))? ' checked="checked"' : '' ?> />
+			<label for="kau-boys_backend_localization_language_new" style="display: inline-block;">Custom: </label>
 			<input type="text" name="kau-boys_backend_localization_language_custom" value="<?php echo $backend_locale_custom ?>" style="vertical-align: middle;" />
-			<br />
-			<span class="description"><?php _e('Here you can set the locale you want to use in the backend (default = en_EN).', 'backend-localization') ?></span>
+			<span class="description"><?php _e('Here you can set a custom lan (default = en_US).', 'backend-localization') ?></span>
 		</p>
 		<p class="submit">
 			<input class="button-primary" name="save" type="submit" value="<?php _e('Save Changes') ?>" />
@@ -81,23 +78,43 @@ function backend_localization_admin_settings(){
 <?php
 }
 
-function backend_localization_get_locale(){
+function backend_localization_get_languages(){
 	$backend_locale_array = array();
 	
-	$files = scandir(ABSPATH.'wp-includes/languages'); /*WP_CONTENT_DIR*/
+	$files = scandir(WP_LANG_DIR);
 	foreach($files as $file){
 		$fileParts = pathinfo($file);
 		if($fileParts['extension'] == 'mo' && strlen($fileParts['filename']) == 5){
-			$backend_locale_array[substr($fileParts['filename'], 0, 2)] = $fileParts['filename'];
+			$backend_locale_array[] = $fileParts['filename'];
 		}
 	}
+	
+	if(!in_array('en_US', $backend_locale_array)){
+		$backend_locale_array[] = 'en_US';
+	}
+	sort($backend_locale_array);
 	
 	return $backend_locale_array;
 }
 
+function backend_localization_save_setting(){
+	update_option('kau-boys_backend_localization_language', $_POST['kau-boys_backend_localization_language']);
+	update_option('kau-boys_backend_localization_language_custom', $_POST['kau-boys_backend_localization_language_custom']);
+	
+	return true;
+}
+
 function localize_backend($locale) {
 	if(defined('WP_ADMIN')) {
-		$locale = isset($_POST['save'])? $_POST['kau-boys_backend_localization_language'] : get_option('kau-boys_backend_localization_language');
+		// save settings before getting the locale
+		if(isset($_POST['save'])) backend_localization_save_setting(); 
+		
+		$backend_locale = get_option('kau-boys_backend_localization_language');
+		$backend_locale_custom = get_option('kau-boys_backend_localization_language_custom');
+		// change $backend_locale if custom value has been choosen
+		if($backend_locale == 'custom_locale') $backend_locale = $backend_locale_custom; 
+		
+		$locale = $backend_locale;
 	}
 	return $locale;
 }
