@@ -80,7 +80,7 @@ function backend_localization_get_languages(){
 		$files = scandir(WP_LANG_DIR);
 		foreach($files as $file){
 			$fileParts = pathinfo($file);
-			if($fileParts['extension'] == 'mo' && (strlen($fileParts['filename']) == 2 || strlen($fileParts['filename']) == 5)){
+			if($fileParts['extension'] == 'mo' && (strlen($fileParts['filename']) <= 5)){
 				$backend_locale_array[] = $fileParts['filename'];
 			}
 		}
