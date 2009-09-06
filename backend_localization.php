@@ -113,9 +113,10 @@ function backend_localization_admin_settings(){
 ?>
 
 <div class="wrap">
+	<?php screen_icon(); ?>
 	<h2>Kau-Boy's Backend Localization</h2>
 	<?php if($settings_saved) : ?>
-	<div id="message" class="updated fade"><p><?php _e('Saved changes') ?>.</p></div>
+	<div id="message" class="updated fade"><p><strong><?php _e('Options saved.') ?></strong></p></div>
 	<? endif ?>
 	<p>
 		<?php _e('Here you can customize the plugin for your needs.', 'backend-localization') ?>
@@ -176,13 +177,16 @@ function backend_localization_login_form(){
 	global $wp_locale_all;
 	
 	$backend_locale_array = backend_localization_get_languages();
+	$backend_locale = get_option('kau-boys_backend_localization_language');
 ?>
 <p>
 	<label>
 		<?php _e('Language', 'backend-localization') ?><br />
 		<select name="kau-boys_backend_localization_language" id="user_email" style="width: 100%;">
 		<?php foreach($backend_locale_array as $locale_value) : ?>
-			<option value="<?php echo $locale_value ?>"><?php echo $wp_locale_all[$locale_value].' ('.$locale_value.')' ?></option>
+			<option value="<?php echo $locale_value ?>"<?php echo ($backend_locale == $locale_value)? ' selected="selected"' : '' ?>>
+				<?php echo $wp_locale_all[$locale_value].' ('.$locale_value.')' ?>
+			</option>
 		<?php endforeach ?>
 		</select>
 	</label>
