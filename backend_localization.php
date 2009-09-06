@@ -183,7 +183,7 @@ function backend_localization_login_form(){
 <p>
 	<label>
 		<?php _e('Language', 'backend-localization') ?><br />
-		<select name="kau-boys_backend_localization_language" id="user_email" style="width: 100%;">
+		<select name="kau-boys_backend_localization_language" id="user_email" style="width: 100%; color: #555;">
 		<?php foreach($backend_locale_array as $locale_value) : ?>
 			<option value="<?php echo $locale_value ?>"<?php echo ($backend_locale == $locale_value)? ' selected="selected"' : '' ?>>
 				<?php echo $wp_locale_all[$locale_value].' ('.$locale_value.')' ?>
