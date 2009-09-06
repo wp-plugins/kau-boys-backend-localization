@@ -205,7 +205,7 @@ function backend_localization_get_locale(){
 
 function localize_backend($locale){
 	// set langauge if user is in admin area
-	if(defined('WP_ADMIN')) {
+	if(defined('WP_ADMIN') || (isset($_POST['pwd']) && isset($_POST['kau-boys_backend_localization_language']))) {
 		$locale = backend_localization_get_locale();
 	}
 	return $locale;
@@ -213,9 +213,10 @@ function localize_backend($locale){
 
 add_action('init', 'init_backend_localization');
 add_action('admin_menu', 'backend_localization_admin_menu');
+add_action('login_form_locale', 'localize_backend', 1, 1);
+add_action('login_head', 'localize_backend', 1, 1);
 add_action('login_form', 'backend_localization_login_form');
 add_action('plugins_loaded', 'backend_localization_save_setting');
-add_action('login_form_locale', 'localize_backend', 1, 1);
 add_filter('plugin_action_links', 'backend_localization_filter_plugin_actions', 10, 2);
 add_filter('locale', 'localize_backend', 1, 1);
 
