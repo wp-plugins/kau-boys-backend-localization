@@ -8,27 +8,295 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/kau-boys-backend-"
 "localization\n"
-"POT-Creation-Date: 2009-09-03 10:54+0000\n"
+"POT-Creation-Date: 2009-09-06 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: backend_localization.php:15
+msgid "Afrikaans"
+msgstr ""
+
+#: backend_localization.php:16
+msgid "Arabic"
+msgstr ""
+
+#: backend_localization.php:17
+msgid "Azerbaijani"
+msgstr ""
+
+#: backend_localization.php:18
+msgid "Bulgarian"
+msgstr ""
+
 #: backend_localization.php:19
-msgid "Backend Language"
+msgid "Bengali"
+msgstr ""
+
+#: backend_localization.php:20
+msgid "Bosnian"
+msgstr ""
+
+#: backend_localization.php:21
+msgid "Catalan"
+msgstr ""
+
+#: backend_localization.php:22
+msgid "Kurdish"
+msgstr ""
+
+#: backend_localization.php:23
+msgid "Czech"
+msgstr ""
+
+#: backend_localization.php:24
+msgid "Cymraeg (Welsh)"
+msgstr ""
+
+#: backend_localization.php:25
+msgid "Danish"
+msgstr ""
+
+#: backend_localization.php:26
+msgid "German"
+msgstr ""
+
+#: backend_localization.php:27
+msgid "Greek"
+msgstr ""
+
+#: backend_localization.php:28
+msgid "English"
+msgstr ""
+
+#: backend_localization.php:29
+msgid "Esperanto"
+msgstr ""
+
+#: backend_localization.php:30
+msgid "Spanish"
+msgstr ""
+
+#: backend_localization.php:31
+msgid "Estonian"
+msgstr ""
+
+#: backend_localization.php:32
+msgid "Basque"
+msgstr ""
+
+#: backend_localization.php:33
+msgid "Persian"
+msgstr ""
+
+#: backend_localization.php:34
+msgid "Finnish"
+msgstr ""
+
+#: backend_localization.php:35
+msgid "Faroese"
+msgstr ""
+
+#: backend_localization.php:36
+msgid "French (Belgium)"
+msgstr ""
+
+#: backend_localization.php:37
+msgid "French"
+msgstr ""
+
+#: backend_localization.php:38
+msgid "Galician "
+msgstr ""
+
+#: backend_localization.php:39
+msgid "Hebrew"
+msgstr ""
+
+#: backend_localization.php:40
+msgid "Hindi"
+msgstr ""
+
+#: backend_localization.php:41
+msgid "Croatian"
+msgstr ""
+
+#: backend_localization.php:42
+msgid "Hungarian"
+msgstr ""
+
+#: backend_localization.php:43
+msgid "Indonesian"
+msgstr ""
+
+#: backend_localization.php:44
+msgid "Italian"
+msgstr ""
+
+#: backend_localization.php:45
+msgid "Japanese"
+msgstr ""
+
+#: backend_localization.php:46
+msgid "Georgian"
+msgstr ""
+
+#: backend_localization.php:47
+msgid "Korean"
+msgstr ""
+
+#: backend_localization.php:48
+msgid "Kyrgyz"
 msgstr ""
 
 #: backend_localization.php:49
-msgid "Here you can customize the plugin for your needs."
+msgid "Latvian"
+msgstr ""
+
+#: backend_localization.php:50
+msgid "Macedonian"
+msgstr ""
+
+#: backend_localization.php:51
+msgid "Malayalam"
+msgstr ""
+
+#: backend_localization.php:52
+msgid "Malay"
 msgstr ""
 
 #: backend_localization.php:53
-msgid "Available languages"
+msgid "Burmese (Myanmar)"
+msgstr ""
+
+#: backend_localization.php:54
+msgid "Norwegian (Bokmål)"
+msgstr ""
+
+#: backend_localization.php:55
+msgid "Dutch"
+msgstr ""
+
+#: backend_localization.php:56
+msgid "Norwegian (Nynorsk)"
+msgstr ""
+
+#: backend_localization.php:57
+msgid "Polish"
+msgstr ""
+
+#: backend_localization.php:58
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: backend_localization.php:59
+msgid "Portuguese"
+msgstr ""
+
+#: backend_localization.php:60
+msgid "Romanian"
+msgstr ""
+
+#: backend_localization.php:61
+msgid "Russian"
+msgstr ""
+
+#: backend_localization.php:62
+msgid "Russian (Ukraine)"
+msgstr ""
+
+#: backend_localization.php:63
+msgid "Sindhi"
 msgstr ""
 
 #: backend_localization.php:64
+msgid "Sinhalese"
+msgstr ""
+
+#: backend_localization.php:65
+msgid "Slovak"
+msgstr ""
+
+#: backend_localization.php:66
+msgid "Slovenian"
+msgstr ""
+
+#: backend_localization.php:67
+msgid "Albanian"
+msgstr ""
+
+#: backend_localization.php:68
+msgid "Serbian"
+msgstr ""
+
+#: backend_localization.php:69
+msgid "Sundanese"
+msgstr ""
+
+#: backend_localization.php:70
+msgid "Swedish"
+msgstr ""
+
+#: backend_localization.php:71
+msgid "Swahili"
+msgstr ""
+
+#: backend_localization.php:72
+msgid "Tamil"
+msgstr ""
+
+#: backend_localization.php:73
+msgid "Thai"
+msgstr ""
+
+#: backend_localization.php:74
+msgid "Turkish"
+msgstr ""
+
+#: backend_localization.php:75
+msgid "Uighur"
+msgstr ""
+
+#: backend_localization.php:76
+msgid "Ukrainian"
+msgstr ""
+
+#: backend_localization.php:77
+msgid "Urdu"
+msgstr ""
+
+#: backend_localization.php:78
+msgid "Uzbek"
+msgstr ""
+
+#: backend_localization.php:79
+msgid "Vietnamese"
+msgstr ""
+
+#: backend_localization.php:80
+msgid "Chinese"
+msgstr ""
+
+#: backend_localization.php:81
+msgid "Chinese (Hong Kong)"
+msgstr ""
+
+#: backend_localization.php:89
+msgid "Backend Language"
+msgstr ""
+
+#: backend_localization.php:121
+msgid "Here you can customize the plugin for your needs."
+msgstr ""
+
+#: backend_localization.php:125
+msgid "Available languages"
+msgstr ""
+
+#: backend_localization.php:136
 #, php-format
 msgid ""
 "If your language isn't listed, you have to download the right version from "
@@ -39,4 +307,8 @@ msgid ""
 "messages/</b></i> folder. Upload them to the langauge folder <i>%2s</i>. You "
 "should than be able to choose the new language (or after a refresh of this "
 "page)."
+msgstr ""
+
+#: backend_localization.php:182
+msgid "Language"
 msgstr ""
