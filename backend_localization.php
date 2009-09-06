@@ -103,10 +103,7 @@ function backend_localization_filter_plugin_actions($links, $file){
 function backend_localization_admin_settings(){
 	global $wp_locale_all;
 	
-	if(isset($_POST['kau-boys_backend_localization_language'])){	
-		$settings_saved = backend_localization_save_setting();
-	}
-	$backend_locale = get_option('kau-boys_backend_localization_language');
+	$backend_locale = backend_localization_get_locale();
 	
 	// set default if values haven't been recieved from the database
 	if(empty($backend_locale)) $backend_locale = 'en_US';
@@ -168,7 +165,7 @@ function backend_localization_get_languages(){
 }
 
 function backend_localization_save_setting(){
-	update_option('kau-boys_backend_localization_language', $_POST['kau-boys_backend_localization_language']);
+	setcookie('kau-boys_backend_localization_language', $_POST['kau-boys_backend_localization_language'], time()+60*60*24*30);
 	
 	return true;
 }
@@ -177,7 +174,7 @@ function backend_localization_login_form(){
 	global $wp_locale_all;
 	
 	$backend_locale_array = backend_localization_get_languages();
-	$backend_locale = get_option('kau-boys_backend_localization_language');
+	$backend_locale = backend_localization_get_locale();
 ?>
 <p>
 	<label>
@@ -194,12 +191,18 @@ function backend_localization_login_form(){
 <?php
 }
 
-function localize_backend($locale) {
-	// save settings before getting the locale
-	if(isset($_POST['kau-boys_backend_localization_language'])) backend_localization_save_setting();
+function backend_localization_get_locale(){
+	return 	isset($_POST['kau-boys_backend_localization_language'])
+			? $_POST['kau-boys_backend_localization_language']
+			: (	isset($_COOKIE['kau-boys_backend_localization_language'])
+				? $_COOKIE['kau-boys_backend_localization_language']
+				: get_option('kau-boys_backend_localization_language'));
+}
+
+function localize_backend($locale){
 	// set langauge if user is in admin area
 	if(defined('WP_ADMIN')) {
-		$locale = get_option('kau-boys_backend_localization_language');
+		$locale = backend_localization_get_locale();
 	}
 	return $locale;
 }
@@ -207,6 +210,7 @@ function localize_backend($locale) {
 add_action('init', 'init_backend_localization');
 add_action('admin_menu', 'backend_localization_admin_menu');
 add_action('login_form', 'backend_localization_login_form');
+add_action('plugins_loaded', 'backend_localization_save_setting');
 add_action('login_form_locale', 'localize_backend', 1, 1);
 add_filter('plugin_action_links', 'backend_localization_filter_plugin_actions', 10, 2);
 add_filter('locale', 'localize_backend', 1, 1);
