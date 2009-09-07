@@ -40,6 +40,7 @@ You can choose the language you want to use from all installed language files or
    
 == Change Log ==
 
+* **0.6** Saving language setting in cookie to enable different languages for multiple users
 * **0.5** Adding language selection to login screen
 * **0.4** Display all languages that are installed in the WordPress language folder 
 * **0.3** Activate new language after saving settings (no more need to refresh)
