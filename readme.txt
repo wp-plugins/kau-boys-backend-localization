@@ -3,7 +3,7 @@ Contributors: Kau-Boy
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7914504
 Tags: admin, backend, localization, english, l10n, i18n, translations, translation
 Requires at least: 2.7
-Stable tag: 0.5
+Stable tag: 0.6
 
 This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration. 
 
