@@ -170,6 +170,8 @@ function backend_localization_get_languages(){
 }
 
 function backend_localization_save_setting(){
+	global $backend_localization_settings_saved;
+	
 	setcookie('kau-boys_backend_localization_language', $_POST['kau-boys_backend_localization_language'], time()+60*60*24*30);
 	$backend_localization_settings_saved = true;
 	
