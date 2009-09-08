@@ -12,6 +12,7 @@ Author URI: http://kau-boys.ramarka.de/blog
 define('BACKEND_LOCALIZATION_URL', WP_PLUGIN_URL.'/'.str_replace(basename( __FILE__),"",plugin_basename(__FILE__)));
 
 $wp_locale_all = array();
+$backend_localization_settings_saved = false;
 
 function init_backend_localization(){
 	global $wp_locale_all;
@@ -116,7 +117,7 @@ function backend_localization_admin_settings(){
 <div class="wrap">
 	<?php screen_icon(); ?>
 	<h2>Kau-Boy's Backend Localization</h2>
-	<?php if($settings_saved) : ?>
+	<?php if($backend_localization_settings_saved) : ?>
 	<div id="message" class="updated fade"><p><strong><?php _e('Options saved.') ?></strong></p></div>
 	<? endif ?>
 	<p>
@@ -170,6 +171,7 @@ function backend_localization_get_languages(){
 
 function backend_localization_save_setting(){
 	setcookie('kau-boys_backend_localization_language', $_POST['kau-boys_backend_localization_language'], time()+60*60*24*30);
+	$backend_localization_settings_saved = true;
 	
 	return true;
 }
