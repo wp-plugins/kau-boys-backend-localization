@@ -216,7 +216,7 @@ add_action('admin_menu', 'backend_localization_admin_menu');
 add_action('login_form_locale', 'localize_backend', 1, 1);
 add_action('login_head', 'localize_backend', 1, 1);
 add_action('login_form', 'backend_localization_login_form');
-add_action('plugins_loaded', 'backend_localization_save_setting'); // TODO: recognize if settings should be saved or have already been saved using another function to reenable sucess message 
+add_action('plugins_loaded', 'backend_localization_save_setting'); // TODO: recognize if settings should be saved or have already been saved using another function to re-enable success message 
 add_filter('plugin_action_links', 'backend_localization_filter_plugin_actions', 10, 2);
 add_filter('locale', 'localize_backend', 1, 1);
 
