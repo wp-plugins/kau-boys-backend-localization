@@ -15,7 +15,7 @@ You can choose the language you want to use from all installed language files or
 == Screenshots ==
 
 1. Screenshot of the settings page
-2. Screenshot language switcher in admin menu (similar to qTranslate switcher)
+2. Screenshot of language switcher in admin menu (similar to qTranslate switcher)
 3. Screenshot of language selection on login form
 
 == Installation ==
@@ -59,7 +59,7 @@ No you don't have to. I love qTranslate and use it for my own blog. qTranslate a
    
 == Change Log ==
 
-* **0.7** Adding language switcher to admin menu and option to hide language selection on login form 
+* **1.0** Adding language switcher to admin menu and option to hide language selection on login form 
 * **0.6** Saving language setting in cookie to enable different languages for multiple users
 * **0.5** Adding language selection to login screen
 * **0.4** Display all languages that are installed in the WordPress language folder 
