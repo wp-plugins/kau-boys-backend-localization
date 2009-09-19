@@ -3,7 +3,7 @@
 Plugin Name: Kau-Boy's Backend Localization
 Plugin URI: http://kau-boys.ramarka.de/blog/2009/09/01/kau-boys-backend-localization-plugin/
 Description: This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration.
-Version: 1.0
+Version: 0.6
 Author: Bernhard Kau
 Author URI: http://kau-boys.ramarka.de/blog
 */
