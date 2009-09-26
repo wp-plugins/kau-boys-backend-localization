@@ -98,7 +98,7 @@ function backend_localization_admin_menu(){
 	$backend_locale = backend_localization_get_locale();
 
 	foreach($backend_locale_array as $locale_value){
-		$link = (strpos(add_query_arg('kau-boys_backend_localization_language', $backend_locale), "wp-admin/") === false) ? preg_replace('#[^?&]*/#i', '', add_query_arg('kau-boys_backend_localization_language', $locale_value)) : preg_replace('#[^?&]*wp-admin/#i', '', add_query_arg('kau-boys_backend_localization_language', $locale_value));
+		$link = 'http://'.add_query_arg('kau-boys_backend_localization_language', $locale_value);
 		add_menu_page($wp_locale_all[$locale_value], $wp_locale_all[$locale_value], 'read', $link, NULL, BACKEND_LOCALIZATION_URL.'flag_icons/'.strtolower(substr($locale_value, (strpos($locale_value, '_') * -1))).'.png');
 	}
 }
