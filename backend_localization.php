@@ -3,7 +3,7 @@
 Plugin Name: Kau-Boy's Backend Localization
 Plugin URI: http://kau-boys.ramarka.de/blog/2009/09/01/kau-boys-backend-localization-plugin/
 Description: This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration.
-Version: 1.0
+Version: 1.1
 Author: Bernhard Kau
 Author URI: http://kau-boys.ramarka.de/blog
 */
@@ -133,14 +133,14 @@ function backend_localization_admin_settings(){
 	<h2>Kau-Boy's Backend Localization</h2>
 	<?php if($settings_saved) : ?>
 	<div id="message" class="updated fade"><p><strong><?php _e('Options saved.') ?></strong></p></div>
-	<? endif ?>
+	<?php endif ?>
 	<p>
 		<?php _e('Here you can customize the plugin for your needs.', 'backend-localization') ?>
 	</p>
 	<form method="post" action="">
 		<p>
 			<input type="checkbox" name="kau-boys_backend_localization_loginselect" id="kau-boys_backend_localization_loginselect"<?php echo ($loginselect == 'on')? ' checked="checked"' : '' ?>/>
-			<label for="kau-boys_backend_localization_loginselect"><? _e('Hide language selection on login form', 'backend-localization') ?></label>
+			<label for="kau-boys_backend_localization_loginselect"><?php _e('Hide language selection on login form', 'backend-localization') ?></label>
 		</p>
 		<p>
 			<h2><?php _e('Available languages', 'backend-localization') ?></h2>
