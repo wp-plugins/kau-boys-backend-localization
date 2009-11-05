@@ -59,7 +59,7 @@ No you don't have to. I love qTranslate and use it for my own blog. qTranslate a
    
 == Change Log ==
 
-* **1.1** Removing to "short open tags" which causes error on blog that don't have "short_open_tag" set to "On"
+* **1.1** Removing "short open tags" which causes error on blog that don't have "short_open_tag" set to "On"
 * **1.0** Adding language switcher to admin menu and option to hide language selection on login form 
 * **0.6** Saving language setting in cookie to enable different languages for multiple users
 * **0.5** Adding language selection to login screen
