@@ -237,11 +237,11 @@ function localize_backend($locale){
 
 add_action('init', 'init_backend_localization');
 add_action('admin_menu', 'backend_localization_admin_menu');
-add_action('login_form_locale', 'localize_backend', 1, 1);
-add_action('login_head', 'localize_backend', 1, 1);
+add_action('login_form_locale', 'localize_backend');
+add_action('login_head', 'localize_backend');
 add_action('login_form', 'backend_localization_login_form');
 add_action('plugins_loaded', 'backend_localization_save_setting'); 
 add_filter('plugin_action_links', 'backend_localization_filter_plugin_actions', 10, 2);
-add_filter('locale', 'localize_backend', 1, 1);
+add_filter('locale', 'localize_backend');
 
 ?>
