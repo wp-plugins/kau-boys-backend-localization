@@ -22,7 +22,7 @@ You can choose the language you want to use from all installed language files or
 
 = Installation trough WordPress admin pages: = 
 
-1. Go to the admin page `Plugins -> Add New` 
+1. Go to the admin page `Plugins -> Add New`
 2. Search for `kau-boy` and choose the plugin
 3. Choose the action `install`
 4. Click on `Install now`
