@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Kau-Boy's Backend Localization
-Plugin URI: http://kau-boys.ramarka.de/blog/2009/09/01/kau-boys-backend-localization-plugin/
+Plugin URI: http://kau-boys.de/wordpress/kau-boys-backend-localization-plugin
 Description: This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration.
-Version: 1.1
+Version: 1.2
 Author: Bernhard Kau
-Author URI: http://kau-boys.ramarka.de/blog
+Author URI: http://kau-boys.de
 */
 
 
@@ -34,7 +34,9 @@ function init_backend_localization(){
 		'el' => __('Greek', 'backend-localization'),
 		'en_US' => __('English', 'backend-localization'),
 		'eo' => __('Esperanto', 'backend-localization'),
+		'es_CL' => __('Spanish (Chile)', 'backend-localization'),
 		'es_ES' => __('Spanish', 'backend-localization'),
+		'es_PE' => __('Spanish (Peru)', 'backend-localization'),
 		'et' => __('Estonian', 'backend-localization'),
 		'eu' => __('Basque', 'backend-localization'),
 		'fa_IR' => __('Persian', 'backend-localization'),
@@ -64,12 +66,12 @@ function init_backend_localization(){
 		'pl_PL' => __('Polish', 'backend-localization'),
 		'pt_BR' => __('Portuguese (Brazil)', 'backend-localization'),
 		'pt_PT' => __('Portuguese', 'backend-localization'),
-		'ro' => __('Romanian', 'backend-localization'),
+		'ro_RO' => __('Romanian', 'backend-localization'),
 		'ru_RU' => __('Russian', 'backend-localization'),
 		'ru_UA' => __('Russian (Ukraine)', 'backend-localization'),
 		'sd_PK' => __('Sindhi', 'backend-localization'),
 		'si_LK' => __('Sinhalese', 'backend-localization'),
-		'sk' => __('Slovak', 'backend-localization'),
+		'sk_SK' => __('Slovak', 'backend-localization'),
 		'sl_SI' => __('Slovenian', 'backend-localization'),
 		'sq' => __('Albanian', 'backend-localization'),
 		'sr_RS' => __('Serbian', 'backend-localization'),
@@ -78,7 +80,7 @@ function init_backend_localization(){
 		'sw' => __('Swahili', 'backend-localization'),
 		'ta_IN' => __('Tamil', 'backend-localization'),
 		'th' => __('Thai', 'backend-localization'),
-		'tr' => __('Turkish', 'backend-localization'),
+		'tr_TR' => __('Turkish', 'backend-localization'),
 		'ug_CN' => __('Uighur', 'backend-localization'),
 		'uk' => __('Ukrainian', 'backend-localization'),
 		'ur' => __('Urdu', 'backend-localization'),
@@ -236,7 +238,7 @@ function localize_backend($locale){
 }
 
 add_action('init', 'init_backend_localization');
-add_action('admin_menu', 'backend_localization_admin_menu');
+do_action('admin_menu', 'backend_localization_admin_menu');
 add_action('login_form_locale', 'localize_backend');
 add_action('login_head', 'localize_backend');
 add_action('login_form', 'backend_localization_login_form');
