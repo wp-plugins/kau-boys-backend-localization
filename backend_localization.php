@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Kau-Boy's Backend Localization
-Plugin URI: http://kau-boys.ramarka.de/blog/2009/09/01/kau-boys-backend-localization-plugin/
+Plugin URI: http://kau-boys.de/wordpress/kau-boys-backend-localization-plugin
 Description: This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration.
-Version: 1.0
+Version: 1.3
 Author: Bernhard Kau
-Author URI: http://kau-boys.ramarka.de/blog
+Author URI: http://kau-boys.de
 */
 
 
@@ -34,7 +34,9 @@ function init_backend_localization(){
 		'el' => __('Greek', 'backend-localization'),
 		'en_US' => __('English', 'backend-localization'),
 		'eo' => __('Esperanto', 'backend-localization'),
+		'es_CL' => __('Spanish (Chile)', 'backend-localization'),
 		'es_ES' => __('Spanish', 'backend-localization'),
+		'es_PE' => __('Spanish (Peru)', 'backend-localization'),
 		'et' => __('Estonian', 'backend-localization'),
 		'eu' => __('Basque', 'backend-localization'),
 		'fa_IR' => __('Persian', 'backend-localization'),
@@ -64,12 +66,12 @@ function init_backend_localization(){
 		'pl_PL' => __('Polish', 'backend-localization'),
 		'pt_BR' => __('Portuguese (Brazil)', 'backend-localization'),
 		'pt_PT' => __('Portuguese', 'backend-localization'),
-		'ro' => __('Romanian', 'backend-localization'),
+		'ro_RO' => __('Romanian', 'backend-localization'),
 		'ru_RU' => __('Russian', 'backend-localization'),
 		'ru_UA' => __('Russian (Ukraine)', 'backend-localization'),
 		'sd_PK' => __('Sindhi', 'backend-localization'),
 		'si_LK' => __('Sinhalese', 'backend-localization'),
-		'sk' => __('Slovak', 'backend-localization'),
+		'sk_SK' => __('Slovak', 'backend-localization'),
 		'sl_SI' => __('Slovenian', 'backend-localization'),
 		'sq' => __('Albanian', 'backend-localization'),
 		'sr_RS' => __('Serbian', 'backend-localization'),
@@ -78,7 +80,7 @@ function init_backend_localization(){
 		'sw' => __('Swahili', 'backend-localization'),
 		'ta_IN' => __('Tamil', 'backend-localization'),
 		'th' => __('Thai', 'backend-localization'),
-		'tr' => __('Turkish', 'backend-localization'),
+		'tr_TR' => __('Turkish', 'backend-localization'),
 		'ug_CN' => __('Uighur', 'backend-localization'),
 		'uk' => __('Ukrainian', 'backend-localization'),
 		'ur' => __('Urdu', 'backend-localization'),
@@ -98,7 +100,7 @@ function backend_localization_admin_menu(){
 	$backend_locale = backend_localization_get_locale();
 
 	foreach($backend_locale_array as $locale_value){
-		$link = (strpos(add_query_arg('kau-boys_backend_localization_language', $backend_locale), "wp-admin/") === false) ? preg_replace('#[^?&]*/#i', '', add_query_arg('kau-boys_backend_localization_language', $locale_value)) : preg_replace('#[^?&]*wp-admin/#i', '', add_query_arg('kau-boys_backend_localization_language', $locale_value));
+		$link = 'http://'.add_query_arg('kau-boys_backend_localization_language', $locale_value);
 		add_menu_page($wp_locale_all[$locale_value], $wp_locale_all[$locale_value], 'read', $link, NULL, BACKEND_LOCALIZATION_URL.'flag_icons/'.strtolower(substr($locale_value, (strpos($locale_value, '_') * -1))).'.png');
 	}
 }
@@ -133,14 +135,14 @@ function backend_localization_admin_settings(){
 	<h2>Kau-Boy's Backend Localization</h2>
 	<?php if($settings_saved) : ?>
 	<div id="message" class="updated fade"><p><strong><?php _e('Options saved.') ?></strong></p></div>
-	<? endif ?>
+	<?php endif ?>
 	<p>
 		<?php _e('Here you can customize the plugin for your needs.', 'backend-localization') ?>
 	</p>
 	<form method="post" action="">
 		<p>
 			<input type="checkbox" name="kau-boys_backend_localization_loginselect" id="kau-boys_backend_localization_loginselect"<?php echo ($loginselect == 'on')? ' checked="checked"' : '' ?>/>
-			<label for="kau-boys_backend_localization_loginselect"><? _e('Hide language selection on login form', 'backend-localization') ?></label>
+			<label for="kau-boys_backend_localization_loginselect"><?php _e('Hide language selection on login form', 'backend-localization') ?></label>
 		</p>
 		<p>
 			<h2><?php _e('Available languages', 'backend-localization') ?></h2>
@@ -170,10 +172,17 @@ function backend_localization_get_languages(){
 	$backend_locale_array = array();
 	
 	if(is_dir(WP_LANG_DIR)){
-		$files = scandir(WP_LANG_DIR);
+		/* php 4 fix */
+		$dir = WP_LANG_DIR;
+		$dh = opendir($dir);
+		while (false !== ($filename = readdir($dh))) {
+			$files[] = $filename;
+		}
+		/* read the array */
 		foreach($files as $file){
 			$fileParts = pathinfo($file);
 			if($fileParts['extension'] == 'mo' && (strlen($fileParts['filename']) <= 5)){
+				$fileParts['filename'] = substr($fileParts['basename'], 0,strpos($fileParts['basename'],'.'));
 				$backend_locale_array[] = $fileParts['filename'];
 			}
 		}
@@ -189,7 +198,8 @@ function backend_localization_get_languages(){
 
 function backend_localization_save_setting(){
 	if(isset($_REQUEST['kau-boys_backend_localization_language'])){
-		setcookie('kau-boys_backend_localization_language', $_REQUEST['kau-boys_backend_localization_language'], time()+60*60*24*30);
+		$_SESSION['kau-boys_backend_localization_language'] = $_REQUEST['kau-boys_backend_localization_language'];
+		update_option('kau-boys_backend_localization_language');	
 	}
 	
 	return true;
@@ -222,8 +232,8 @@ function backend_localization_login_form(){
 function backend_localization_get_locale(){
 	return 	isset($_REQUEST['kau-boys_backend_localization_language'])
 			? $_REQUEST['kau-boys_backend_localization_language']
-			: (	isset($_COOKIE['kau-boys_backend_localization_language'])
-				? $_COOKIE['kau-boys_backend_localization_language']
+			: (	isset($_SESSION['kau-boys_backend_localization_language'])
+				? $_SESSION['kau-boys_backend_localization_language']
 				: get_option('kau-boys_backend_localization_language'));
 }
 
@@ -237,11 +247,11 @@ function localize_backend($locale){
 
 add_action('init', 'init_backend_localization');
 add_action('admin_menu', 'backend_localization_admin_menu');
-add_action('login_form_locale', 'localize_backend', 1, 1);
-add_action('login_head', 'localize_backend', 1, 1);
+add_action('login_form_locale', 'localize_backend', 1 , 1);
+add_action('login_head', 'localize_backend', 1 , 1);
 add_action('login_form', 'backend_localization_login_form');
-add_action('plugins_loaded', 'backend_localization_save_setting'); 
+add_action('plugins_loaded', 'backend_localization_save_setting');
 add_filter('plugin_action_links', 'backend_localization_filter_plugin_actions', 10, 2);
-add_filter('locale', 'localize_backend', 1, 1);
+add_filter('locale', 'localize_backend', 1 , 1);
 
 ?>
