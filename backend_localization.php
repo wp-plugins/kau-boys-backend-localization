@@ -3,7 +3,7 @@
 Plugin Name: Kau-Boy's Backend Localization
 Plugin URI: http://kau-boys.de/wordpress/kau-boys-backend-localization-plugin
 Description: This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration.
-Version: 1.3
+Version: 1.4
 Author: Bernhard Kau
 Author URI: http://kau-boys.de
 */
@@ -117,7 +117,7 @@ function backend_localization_filter_plugin_actions($links, $file){
 }
 
 function backend_localization_admin_settings(){
-	global $wp_locale_all;
+	global $wp_locale_all, $wp_version;
 	
 	if(isset($_POST['save'])){
 		update_option('kau-boys_backend_localization_loginselect', $_POST['kau-boys_backend_localization_loginselect']);
@@ -156,7 +156,7 @@ function backend_localization_admin_settings(){
 			<br />
 			<?php endforeach ?>
 			<div class="description">
-				<?php echo sprintf(__('If your language isn\'t listed, you have to download the right version from the WordPress repository: <a href="http://svn.automattic.com/wordpress-i18n">http://svn.automattic.com/wordpress-i18n</a>. Browser to the language folder of your choice and get the <b>all</b> .mo files for your WordPress Version from <i><b>tags/%1s/messages/</b></i> or from the <i><b>trunk/messages/</b></i> folder. Upload them to the langauge folder <i>%2s</i>. You should than be able to choose the new language (or after a refresh of this page).', 'backend-localization'), $GLOBALS['wp_version'], WP_LANG_DIR) ?>
+				<?php echo sprintf(__('If your language isn\'t listed, you have to download the right version from the WordPress repository: <a href="http://svn.automattic.com/wordpress-i18n">http://svn.automattic.com/wordpress-i18n</a>. Browser to the language folder of your choice and get the <b>all</b> .mo files for your WordPress Version from <i><b>tags/%1s/messages/</b></i> or from the <i><b>trunk/messages/</b></i> folder. Upload them to the langauge folder <i>%2s</i>. You should than be able to choose the new language (or after a refresh of this page).', 'backend-localization'), $wp_version, WP_LANG_DIR) ?>
 			</div>
 		</p>
 		<p class="submit">
@@ -198,7 +198,7 @@ function backend_localization_get_languages(){
 
 function backend_localization_save_setting(){
 	if(isset($_REQUEST['kau-boys_backend_localization_language'])){
-		setcookie('kau-boys_backend_localization_language', $_REQUEST['kau-boys_backend_localization_language'], time()+60*60*24*30);
+		setcookie('kau-boys_backend_localization_language', $_REQUEST['kau-boys_backend_localization_language'], time()+60*60*24*30, '/');
 	}
 	
 	return true;
@@ -236,7 +236,7 @@ function backend_localization_get_locale(){
 				: get_option('kau-boys_backend_localization_language'));
 }
 
-function localize_backend($locale){
+function localize_backend(){
 	// set langauge if user is in admin area
 	if(defined('WP_ADMIN') || (isset($_REQUEST['pwd']) && isset($_REQUEST['kau-boys_backend_localization_language']))) {
 		$locale = backend_localization_get_locale();
@@ -244,12 +244,18 @@ function localize_backend($locale){
 	return $locale;
 }
 
+function backend_localization_set_login_language(){
+	setcookie('kau-boys_backend_localization_language', "", time() - 3600, '/');
+	setcookie('kau-boys_backend_localization_language', $_REQUEST['kau-boys_backend_localization_language'], time()+60*60*24*30, '/');
+}
+
 add_action('init', 'init_backend_localization');
 add_action('admin_menu', 'backend_localization_admin_menu');
+add_action('admin_menu', 'backend_localization_save_setting');
+add_action('wp_login', 'backend_localization_set_login_language');
 add_action('login_form_locale', 'localize_backend');
 add_action('login_head', 'localize_backend');
 add_action('login_form', 'backend_localization_login_form');
-add_action('plugins_loaded', 'backend_localization_save_setting');
 add_filter('plugin_action_links', 'backend_localization_filter_plugin_actions', 10, 2);
 add_filter('locale', 'localize_backend');
 
