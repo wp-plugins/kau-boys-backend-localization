@@ -61,6 +61,7 @@ No you don't have to. I love qTranslate and use it for my own blog. qTranslate a
    
 == Change Log ==
 
+* **1.6.1** Fixing typo in language names 
 * **1.6** Add WP3 CSS class for the language select on the login form
 * **1.5** Fixing the plugin for WordPress 3.0 MULTISITE feature
 * **1.4** Fixing the plugin for WordPress MU and fixing the login form selection
