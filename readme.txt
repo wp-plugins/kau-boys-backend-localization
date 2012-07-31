@@ -61,6 +61,7 @@ No you don't have to. I love qTranslate and use it for my own blog. qTranslate a
    
 == Change Log ==
 
+* **2.0.1** Fixing shown language in the switching message. Use htmlspecialchars() to prevent XSS vulnerabilities. Thanks again to Matt Fuller for teaching me how to do it correctly!
 * **2.0** Adding some new languages. Fixing link to switch languages in backend. Thanks to Justin! Fixing XSS vulnerabilities. Many Thanks to Matt Fuller from MOZILLA!
 * **1.6.1** Fixing typo in language names 
 * **1.6** Add WP3 CSS class for the language select on the login form
