@@ -3,7 +3,7 @@ Contributors: Kau-Boy
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7914504
 Tags: admin, backend, localization, english, l10n, i18n, translations, translation
 Requires at least: 3.2
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 
 This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration. 
 
@@ -56,12 +56,13 @@ Every language that is supported by WordPress can be chosen. You just need a cop
 
 = Do I need this plugin if I use qTranslate? = 
 
-No you don't have to. I love qTranslate and use it for my own blog. qTranslate also offers the ability to switch the backend language. But if you don't want to publish the content of your blog in more than one language, you shouldn't use qTranslate. For I created this plugin for users who only wan't to switch the backend language without the overhead of any multilingual plugin. 
+No you don't have to. I love qTranslate and use it for my own blog. qTranslate also offers the ability to switch the backend language. But if you don't want to publish the content of your blog in more than one language, you shouldn't use qTranslate. I created this plugin for users who only wan't to switch the backend language without the overhead of any multilingual plugin. 
 
    
 == Change Log ==
 
-* **2.0.2** Adding correct flag for Estonia
+* **2.0.4** Adding new languages Schweizerdeutsch and Tagalog
+* **2.0.3** Adding correct flag for Estonia
 * **2.0.2** Adding flags for new languages added in version 2.0
 * **2.0.1** Fixing shown language in the switching message. Use htmlspecialchars() to prevent XSS vulnerabilities. Thanks again to Matt Fuller for teaching me how to do it correctly!
 * **2.0** Adding some new languages. Fixing link to switch languages in backend. Thanks to Justin! Fixing XSS vulnerabilities. Many Thanks to Matt Fuller from MOZILLA!
