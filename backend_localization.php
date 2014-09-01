@@ -3,7 +3,7 @@
 Plugin Name: Backend Localization
 Plugin URI: http://kau-boys.com/230/wordpress/kau-boys-backend-localization-plugin
 Description: This plugin enables you to run your blog in a different language than the backend of your blog. So you can serve your blog using e.g. German as the default language for the users, but keep English as the language for the administration.
-Version: 2.1.1
+Version: 2.1.2
 Requires at least: 3.2
 Author: Bernhard Kau
 Author URI: http://kau-boys.com
@@ -303,7 +303,11 @@ function localize_backend( $locale ) {
 				$locale = $_REQUEST[ 'lang' ];
 			}
 		} else {
-			$locale = backend_localization_get_locale();
+			$backend_locale = backend_localization_get_locale();
+			// make sure a backend locale could be found
+			if ( ! empty( $backend_locale ) ) {
+				$locale = $backend_locale;
+			}
 		}
 	}
 	
